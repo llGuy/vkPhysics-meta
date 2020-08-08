@@ -2,13 +2,17 @@
 
 require_once "db_config.php";
 
-$db_connection = null;
+function create_connection() {
+    try {
+        global $dsn;
+        global $user;
+        global $password;
 
-try {
-    global $db_connection;
-    $db_connection = new PDO($dsn, $user, $password);
-} catch (PDOException $pe) {
-    die("Could not connect to the vkPhysics database: " . $pe->getMessage());
+        return new PDO($dsn, $user, $password);
+    } catch (PDOException $pe) {
+        die("Could not connect to the vkPhysics database: " . $pe->getMessage());
+        return null;
+    }
 }
 
 ?>
