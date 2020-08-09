@@ -8,8 +8,8 @@ $userid = $_GET['userid'];
 
 $db_connection = create_connection();
 
-$check = $db_connection->prepare("select * from users where uid = $userid;");
-$check->execute();
+$check = $db_connection->prepare("select * from users where uid = :uid;");
+$check->execute(['uid' => $userid]);
 
 if ($check->rowCount() > 0) {
     $row = $check->fetch();

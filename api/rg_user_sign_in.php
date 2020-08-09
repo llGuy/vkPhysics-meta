@@ -9,8 +9,8 @@ $user_password = $_GET['password'];
 $db_connection = create_connection();
 
 // Check if username already exists in the database
-$check = $db_connection->prepare("select * from users where username = '$username'");
-$check->execute();
+$check = $db_connection->prepare("select * from users where username = :username");
+$check->execute(['username' => $username]);
 
 if ($check->rowCount() > 0) {
     $row = $check->fetch();
@@ -21,8 +21,8 @@ if ($check->rowCount() > 0) {
         $usertag = generate_user_tag();
         $userid = $row['uid'];
 
-        $insert = $db_connection->prepare("update users set usertag = $usertag where uid = $userid");
-        $insert->execute();
+        $insert = $db_connection->prepare("update users set usertag = :usertag where uid = :userid");
+        $insert->execute(['usertag' => $usertag, 'userid' => $userid]);
 
         print("1\n$usertag\n$userid\n");
     }

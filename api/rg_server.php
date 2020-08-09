@@ -8,15 +8,15 @@ $remote_address = $_SERVER['REMOTE_ADDR'];
 
 $db_connection = create_connection();
 
-$check = $db_connection->prepare("select 1 from servers where servername = '$servername';");
-$check->execute();
+$check = $db_connection->prepare("select 1 from servers where servername = :servername;");
+$check->execute(['servername' => $servername]);
 
 if ($check->rowCount() > 0) {
     print("0\n");
 }
 else {
-    $insert = $db_connection->prepare("insert into servers (servername, ip, playercount) values ('$servername', '$remote_address', 0)");
-    $insert->execute();
+    $insert = $db_connection->prepare("insert into servers (servername, ip, playercount) values (:servername, :ip, 0)");
+    $insert->execute(['servername' => $servername, 'ip' => $remote_address]);
 
     print("1\n");
 }
