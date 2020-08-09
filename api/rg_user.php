@@ -1,6 +1,7 @@
 <?php
 
 require_once "db_connect.php";
+require_once "helper.php";
 
 $username = $_GET['username'];
 $user_password = $_GET['password'];
@@ -12,14 +13,17 @@ $check = $db_connection->prepare("select 1 from users where username = '$usernam
 $check->execute();
 
 if ($check->rowCount() > 0) {
-    print("Username already exists\n");
-    print('0');
-} else {
-    $insert = $db_connection->prepare("insert into users (username, password) values ('$username', '$user_password')");
+    print("0\n");
+}
+else {
+    $usertag = generate_user_tag();
+
+    $insert = $db_connection->prepare("insert into users (username, password, usertag) values ('$username', '$user_password', $usertag)");
     $insert->execute();
 
-    print("Username available\n");
-    print('1');
+    $userid = $db_connection->lastInsertId();
+
+    print("1\n$usertag\n$userid\n");
 }
 
 ?>
