@@ -3,8 +3,8 @@
 require_once "db_connect.php";
 require_once "helper.php";
 
-$usertag = $_GET['usertag'];
-$userid = $_GET['userid'];
+$usertag = $_POST['usertag'];
+$userid = $_POST['userid'];
 
 $db_connection = create_connection();
 

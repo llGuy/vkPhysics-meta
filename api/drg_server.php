@@ -4,7 +4,7 @@
 
 require_once "db_connect.php";
 
-$uid = $_GET['uid'];
+$uid = $_POST['uid'];
 
 $db_connection = create_connection();
 

@@ -3,7 +3,7 @@
 
 require_once "db_connect.php";
 
-$servername = $_GET['servername'];
+$servername = $_POST['servername'];
 $remote_address = $_SERVER['REMOTE_ADDR'];
 
 $db_connection = create_connection();
