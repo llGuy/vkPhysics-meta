@@ -13,12 +13,14 @@ $server_count = $servers->rowCount();
 print("$server_count\n");
 
 while ($srv = $servers->fetch()) {
-    $uid = $srv['uid'];
-    $servername = $srv['servername'];
-    $ip = $srv['ip'];
-    $playercount = $srv['playercount'];
+    if ($srv['online'] == 1) {
+        $uid = $srv['uid'];
+        $servername = $srv['servername'];
+        $ip = $srv['ip'];
+        $playercount = $srv['playercount'];
 
-    print("$uid;$servername;$ip;$playercount\n");
+        print("$uid;$servername;$ip;$playercount\n");
+    }
 }
 
 ?>

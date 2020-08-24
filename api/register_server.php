@@ -18,7 +18,9 @@ else {
     $insert = $db_connection->prepare("insert into servers (servername, ip, playercount) values (:servername, :ip, 0)");
     $insert->execute(['servername' => $servername, 'ip' => $remote_address]);
 
-    print("1\n");
+    $server_id = $db_connection->lastInsertId();
+
+    print("1\n$server_id\n");
 }
 
 ?>
